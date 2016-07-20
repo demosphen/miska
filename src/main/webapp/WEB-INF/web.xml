@@ -5,9 +5,10 @@
                       http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
          version="3.0">
 
+
     <filter>
         <filter-name>MVCFilter</filter-name>
-        <filter-class>lv.javaguru.java2.servlet.mvc.MVCFilter</filter-class>
+        <filter-class>lv.javaguru.java2.servlet.MVCFilter</filter-class>
     </filter>
 
     <filter-mapping>
@@ -34,7 +35,7 @@
 
     <servlet>
         <servlet-name>ParameterProcessingServlet</servlet-name>
-        <servlet-class>lv.javaguru.java2.servlet.ParameterProcessingServlet</servlet-class>
+        <servlet-class>lv.javaguru.java2.servlet.example.ParameterProcessingServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -44,7 +45,7 @@
 
     <servlet>
         <servlet-name>SessionUsageServlet</servlet-name>
-        <servlet-class>lv.javaguru.java2.servlet.SessionUsageServlet</servlet-class>
+        <servlet-class>lv.javaguru.java2.servlet.example.SessionUsageServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -54,7 +55,7 @@
 
     <servlet>
         <servlet-name>RedirectToJSPServlet</servlet-name>
-        <servlet-class>lv.javaguru.java2.servlet.RedirectToJSPServlet</servlet-class>
+        <servlet-class>lv.javaguru.java2.servlet.example.RedirectToJSPServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
