@@ -1,8 +1,9 @@
 package lv.javaguru.java2.servlet.mvc;
 
+import lv.javaguru.java2.servlet.HelloWorldController;
+import lv.javaguru.java2.servlet.MVCController;
+
 import javax.servlet.*;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -20,6 +21,7 @@ public class MVCFilter implements Filter {
     public void doFilter(ServletRequest request,
                          ServletResponse response,
                          FilterChain filterChain) throws IOException, ServletException {
+        /*
         HttpServletRequest req = (HttpServletRequest)request;
         HttpServletResponse resp = (HttpServletResponse)response;
 
@@ -36,6 +38,7 @@ public class MVCFilter implements Filter {
             requestDispacher.forward(req, resp);
         }
         else filterChain.doFilter(request,response);
+        */
     }
 
     public void destroy() {

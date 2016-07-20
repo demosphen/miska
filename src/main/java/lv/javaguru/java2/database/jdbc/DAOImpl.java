@@ -8,17 +8,14 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
-/**
- * Created by Viktor on 01/07/2014.
- */
+
 public class DAOImpl {
 
     private static final String DB_CONFIG_FILE = "database.properties";
-
-    private String dbUrl = null;
-    private String userName = null;
-    private String password = null;
-
+    private String dbBaseUrl  = "jdbc:mysql://localhost:3306/";
+    private String dbSchema = "java2miskatest";
+    private String userName  = "root";
+    private String password = "miska112358";
 
     public DAOImpl() {
         registerJDBCDriver();
@@ -38,8 +35,8 @@ public class DAOImpl {
         Properties properties = new Properties();
         try {
             properties.load(DAOImpl.class.getClassLoader().getResourceAsStream(DB_CONFIG_FILE));
-
-            dbUrl = properties.getProperty("dbUrl");
+            dbBaseUrl = properties.getProperty("dbBaseUrl");
+            dbSchema = properties.getProperty("dbSchema");
             userName = properties.getProperty("userName");
             password = properties.getProperty("password");
         } catch (IOException e){
@@ -48,9 +45,13 @@ public class DAOImpl {
         }
     }
 
+    public void setDbSchema(String dbSchema){
+        this.dbSchema = dbSchema;
+    }
+
     protected Connection getConnection() throws DBException {
         try{
-            return DriverManager.getConnection(dbUrl, userName, password);
+            return DriverManager.getConnection(dbBaseUrl + dbSchema, userName, password);
         } catch (SQLException e) {
             System.out.println("Exciption while getting connection to database");
             e.printStackTrace();

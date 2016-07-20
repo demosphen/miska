@@ -14,9 +14,7 @@ import static org.junit.Assert.assertNotNull;
 public class UserDAOImplTest {
 
     private DatabaseCleaner databaseCleaner = new DatabaseCleaner();
-
     private UserDAOImpl userDAO = new UserDAOImpl();
-
 
     @Before
     public void init() throws DBException {
@@ -53,6 +51,11 @@ public class UserDAOImplTest {
         user.setFirstName(firstName);
         user.setLastName(lastName);
         return user;
+    }
+
+    @Test
+    public void testGetAll() throws DBException{
+        userDAO.getAll();
     }
 
 }

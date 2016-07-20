@@ -4,6 +4,7 @@ import lv.javaguru.java2.database.DBException;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +12,7 @@ public class DatabaseCleaner extends DAOImpl {
 
     private List<String> getTableNames() {
         List<String> tableNames = new ArrayList<String>();
-        tableNames.add("USERS");
+        tableNames.add("users");
         return tableNames;
     }
 
@@ -32,5 +33,7 @@ public class DatabaseCleaner extends DAOImpl {
             }
         }
     }
+
+
 
 }
