@@ -1,22 +1,35 @@
 package lv.javaguru.java2.domain;
 
+
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
 public class Product {
-    private Long id;
+    private long id;
     private String name;
     private String description;
+
+    private  long categoryId;
     private Double price;
     private String imagePath;
-    private Map<String,String> attributes;
+    private Map<String,String> attributes = new HashMap<String, String>();
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
+    }
+
+    public long getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(long categoryId) {
+        this.categoryId = categoryId;
     }
 
     public String getName() {
@@ -51,11 +64,11 @@ public class Product {
         this.imagePath = imagePath;
     }
 
-    public Map<String, String> getAttributes() {
+    public Map<String,String> getAttributes() {
         return attributes;
     }
 
-    public void setAttributes(Map<String, String> attributes) {
+    public void setAttributes(Map<String,String> attributes) {
         this.attributes = attributes;
     }
 

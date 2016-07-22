@@ -39,13 +39,31 @@ public class DatabaseRefresher extends DAOImpl {
                 " firstName VARCHAR(45) NULL , " +
                 " lastName VARCHAR(45) NULL , " +
                 " PRIMARY KEY(userid))");
-
+        /*
         sqlStatements.add("CREATE TABLE java2miskatest.category " +
                 "( id INT NOT NULL AUTO_INCREMENT, " +
                 " name VARCHAR(45) NULL , " +
                 " father_id INT NOT NULL , " +
                 " PRIMARY KEY(id) , " +
                 " KEY(father_id))");
+        */
+
+        sqlStatements.add("CREATE TABLE java2miskatest.products " +
+                "( id INT NOT NULL AUTO_INCREMENT, " +
+                " name VARCHAR(45) NULL , " +
+                " description VARCHAR(240) NULL , " +
+                " imagepath VARCHAR(240) NULL , " +
+                " price NUMERIC(15,2) NULL , " +
+                " category_id INT NOT NULL , " +
+                " PRIMARY KEY(id) , " +
+                " KEY(category_id))");
+
+        sqlStatements.add("CREATE TABLE java2miskatest.product_attributes " +
+                "( product_id INT , " +
+                " attribute  VARCHAR(45) NULL , " +
+                " attr_value VARCHAR(120) NULL , " +
+                " KEY(product_id))");
+
         return sqlStatements;
     }
 
