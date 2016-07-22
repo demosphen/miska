@@ -6,4 +6,5 @@ package lv.javaguru.java2.database.entities;
 public class Tes {
 
 
+
 }
