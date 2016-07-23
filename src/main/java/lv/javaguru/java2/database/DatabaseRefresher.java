@@ -1,12 +1,10 @@
 package lv.javaguru.java2.database;
 
 import lv.javaguru.java2.database.jdbc.DAOImpl;
-
 import java.sql.Connection;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-
 
 public class DatabaseRefresher extends DAOImpl {
 
@@ -39,14 +37,13 @@ public class DatabaseRefresher extends DAOImpl {
                 " firstName VARCHAR(45) NULL , " +
                 " lastName VARCHAR(45) NULL , " +
                 " PRIMARY KEY(userid))");
-        /*
-        sqlStatements.add("CREATE TABLE java2miskatest.category " +
+
+        sqlStatements.add("CREATE TABLE java2miskatest.categories " +
                 "( id INT NOT NULL AUTO_INCREMENT, " +
-                " name VARCHAR(45) NULL , " +
+                " name VARCHAR(120) NULL , " +
                 " father_id INT NOT NULL , " +
                 " PRIMARY KEY(id) , " +
                 " KEY(father_id))");
-        */
 
         sqlStatements.add("CREATE TABLE java2miskatest.products " +
                 "( id INT NOT NULL AUTO_INCREMENT, " +

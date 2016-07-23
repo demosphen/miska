@@ -66,7 +66,7 @@ public class ProductDAOImplTest {
     public void testUpdate() throws DBException{
 
         Product product = sampleProductFromDb();
-        product.setName("updated name");
+        product.setName("Mango");
         product.setPrice(product.getPrice() * 2);
         product.getAttributes().remove("attr1");
         product.getAttributes().put("attr3","param3");
@@ -106,11 +106,11 @@ public class ProductDAOImplTest {
 
     private Product sampleProduct(){
         Product product = new Product();
-        product.setName("Cake 'Bishops Indulgence'");
+        product.setName("Mango 'Mango-Mango'");
         product.setDescription("meow");
         product.setCategoryId(123L);
-        product.setPrice(12.3);
-        product.setImagePath("this/is/imagepath/");
+        product.setPrice(3.45);
+        product.setImagePath("img/products/fruits/testpath/");
         return  product;
     }
 

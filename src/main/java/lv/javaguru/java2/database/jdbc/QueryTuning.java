@@ -1,18 +1,16 @@
 package lv.javaguru.java2.database.jdbc;
 
-import javafx.util.Pair;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
 
-import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by algis on 16.22.7.
- */
+
 public class QueryTuning {
     private int queryOffset;
     private int queryLimit;
-    private List<Pair<String,Boolean>> sortOrder = new ArrayList<Pair<String,Boolean>>();
+    private List<ImmutablePair<String,Boolean>> sortOrder = new ArrayList<ImmutablePair<String,Boolean>>();
 
     public void setQueryOffset(int offset) {
         this.queryOffset = Math.max(offset,0);
@@ -31,7 +29,7 @@ public class QueryTuning {
         addSortOrder(column,false);
     }
     public void addSortOrder(String column,Boolean direction){
-        sortOrder.add(new Pair(column,direction));
+        sortOrder.add(new ImmutablePair<String,Boolean>(column,direction));
     }
 
     public String tuneQuery(String sql){

@@ -1,6 +1,5 @@
 package lv.javaguru.java2.database.jdbc;
 
-import javafx.util.Pair;
 import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.domain.Product;
 import lv.javaguru.java2.domain.User;
