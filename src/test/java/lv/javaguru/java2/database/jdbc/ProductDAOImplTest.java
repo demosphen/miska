@@ -24,12 +24,12 @@ public class ProductDAOImplTest {
     public void testCreateWithoutAttributes() throws DBException{
 
         Product product = sampleProduct();
-
         assertTrue(product.getId() == 0);
         productDAO.create(product);
         assertTrue(product.getId() > 0 );
 
         Product anotherProduct = productDAO.getById(product.getId());
+
         assertEquals(product.getName(), anotherProduct.getName());
         assertEquals(product.getPrice(), anotherProduct.getPrice());
         assertThatAttributesAreEqual(product,anotherProduct);

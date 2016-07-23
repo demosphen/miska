@@ -19,6 +19,12 @@ import java.util.Map;
  */
 public class ProductDAOImpl extends DAOImpl{
 
+    private final String GET_ALL_QUERY_PHRASE = "select * from products";
+    private final String GET_BY_ID_PHRASE = "select * from products where id = ?";
+    private final String GET_ATTRIBUTES_BY_ID_PHRASE = "select * from product_attributes where product_id = ?";
+    private final String DELETE_ATTRIBUTES_BY_ID_PHRASE = "delete from product_attributes where product_id = ?";
+    private final String DELETE_BY_ID_PHRASE = "delete from products where id = ?";
+
     private Product getFromResultSet(Connection connection , ResultSet resultSet) throws SQLException{
         Product product;
         product = new Product();
@@ -29,8 +35,7 @@ public class ProductDAOImpl extends DAOImpl{
         product.setPrice(resultSet.getDouble("price"));
         product.setCategoryId(resultSet.getLong("category_id"));
 
-        PreparedStatement preparedStatementForAttributes = connection
-                .prepareStatement("select * from product_attributes where product_id = ?");
+        PreparedStatement preparedStatementForAttributes = connection.prepareStatement(GET_ATTRIBUTES_BY_ID_PHRASE);
         preparedStatementForAttributes.setLong( 1, product.getId());
         resultSet = preparedStatementForAttributes.executeQuery();
         Map<String,String> attributes = new HashMap<String, String>();
@@ -47,8 +52,7 @@ public class ProductDAOImpl extends DAOImpl{
         Connection connection = null;
         try {
             connection = getConnection();
-            PreparedStatement preparedStatement = connection
-                    .prepareStatement("select * from products where id = ?");
+            PreparedStatement preparedStatement = connection.prepareStatement(GET_BY_ID_PHRASE);
             preparedStatement.setLong( 1, id);
 
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -66,13 +70,20 @@ public class ProductDAOImpl extends DAOImpl{
         }
     }
 
+    public List<Product> getAll(QueryTuning queryTuning) throws DBException{
+        return getAllBySQL(queryTuning.tuneQuery(GET_ALL_QUERY_PHRASE));
+    }
     public List<Product> getAll() throws DBException{
+        return getAllBySQL(GET_ALL_QUERY_PHRASE);
+    }
+
+    private List<Product> getAllBySQL(String sql) throws DBException{
         Connection connection = null;
         List<Product> products = new ArrayList<Product>();
         try {
             connection = getConnection();
             PreparedStatement preparedStatement = connection
-                    .prepareStatement("select * from products");
+                    .prepareStatement(sql);
 
             ResultSet resultSet = preparedStatement.executeQuery();
             while(resultSet.next()) {
@@ -81,11 +92,13 @@ public class ProductDAOImpl extends DAOImpl{
             }
             return products;
 
-        } catch (Throwable e) {
-            System.out.println("Exception while execute ProductDAOImpl.getAll()");
+        }
+        catch (Throwable e) {
+            System.out.println("Exception while execute SQL: " + sql);
             e.printStackTrace();
             throw new DBException(e);
-        } finally {
+        }
+        finally {
             closeConnection(connection);
         }
     }
@@ -100,7 +113,7 @@ public class ProductDAOImpl extends DAOImpl{
         }
     }
     private void deleteAttributes(Connection connection  , Product product) throws SQLException{
-        PreparedStatement preparedStatement = connection.prepareStatement("delete from product_attributes where product_id = ?");
+        PreparedStatement preparedStatement = connection.prepareStatement(DELETE_ATTRIBUTES_BY_ID_PHRASE);
         preparedStatement.setLong(1 , product.getId());
         preparedStatement.executeUpdate();
     }
@@ -112,7 +125,7 @@ public class ProductDAOImpl extends DAOImpl{
         Connection connection = null;
         try {
             connection = getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("delete from products where id = ?");
+            PreparedStatement preparedStatement = connection.prepareStatement(DELETE_BY_ID_PHRASE);
             preparedStatement.setLong(1,product.getId());
             preparedStatement.executeUpdate();
             deleteAttributes(connection,product);
