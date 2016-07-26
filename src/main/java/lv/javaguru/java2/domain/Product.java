@@ -7,7 +7,7 @@ public class Product {
     private Long id;
     private String name;
     private String description;
-    private Double price;
+    private long price;
     private String imagePath;
     private Map<String,String> attributes;
 
@@ -35,12 +35,16 @@ public class Product {
         this.description = description;
     }
 
-    public Double getPrice() {
+    public long getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(long price) {
         this.price = price;
+    }
+
+    public String getPriceString() {
+        return String.valueOf((double) getPrice() / 100);
     }
 
     public String getImagePath() {

@@ -7,15 +7,18 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MVCFilter implements Filter {
+public class Router implements Filter {
 
     private Map<String, MVCController> controllers;
 
 
     public void init(FilterConfig filterConfig) throws ServletException {
         controllers = new HashMap<String, MVCController>();
-        controllers.put("/hello", new HelloWorldController());
-        controllers.put("/fp", new FrontPageController());
+
+        HelloWorldController helloController = new HelloWorldController();
+
+        controllers.put("/", helloController);
+        controllers.put("/hello", helloController);
     }
 
     public void doFilter(ServletRequest request,
