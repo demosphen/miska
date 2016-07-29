@@ -1,15 +1,10 @@
 package lv.javaguru.java2.domain;
 
-import java.util.Map;
-
-
 public class Product {
     private Long id;
     private String name;
     private String description;
     private long price;
-    private String imagePath;
-    private Map<String,String> attributes;
 
     public Long getId() {
         return id;
@@ -43,27 +38,11 @@ public class Product {
         this.price = price;
     }
 
-    public String getPriceString() {
-        return String.valueOf((double) getPrice() / 100);
-    }
-
-    public String getImagePath() {
-        return imagePath;
-    }
-
-    public void setImagePath(String imagePath) {
-        this.imagePath = imagePath;
-    }
-
-    public Map<String, String> getAttributes() {
-        return attributes;
-    }
-
-    public void setAttributes(Map<String, String> attributes) {
-        this.attributes = attributes;
+    public String getDisplayPrice() {
+        return String.valueOf((double) getPrice() * 0.01);
     }
 
     public String toString(){
-        return "Product: " + id + " " + name;
+        return String.format("Product %d: %s, %s", id, name, getDisplayPrice());
     }
 }
