@@ -9,8 +9,7 @@ public class ProductTest {
 
     @Test
     public void testDisplayPrice() {
-        Product p = new Product();
-        p.setPrice(1333);
+        Product p = new Product("Test product", "", 1333);
         assertEquals(p.getDisplayPrice(), "13.33");
     }
 

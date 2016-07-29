@@ -1,16 +1,27 @@
 package lv.javaguru.java2.domain;
 
 public class Product {
-    private long id;
+    private int id;
     private String name;
     private String description;
     private long price;
 
-    public long getId() {
+    public Product(int id, String name, String description, long price) {
+        this(name, description, price);
+        setId(id);
+    }
+
+    public Product(String name, String description, long price) {
+        this.name = name;
+        this.description = description;
+        this.price = price;
+    }
+
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -44,5 +55,16 @@ public class Product {
 
     public String toString(){
         return String.format("Product %d: %s, %s", id, name, getDisplayPrice());
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other instanceof Product) {
+            Product otherProduct = (Product) other;
+            return (this.getName().equals(otherProduct.getName()))
+                    && (this.getDescription().equals(otherProduct.getDescription()))
+                    && (this.getPrice() == otherProduct.getPrice());
+        }
+        return false;
     }
 }

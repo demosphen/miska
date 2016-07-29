@@ -12,11 +12,10 @@ import java.util.Properties;
 public class DAOImpl {
 
     private static final String DB_CONFIG_FILE = "database.properties";
-    // wth? remove?
-    private String dbBaseUrl  = "jdbc:mysql://localhost:3306/";
-    private String dbSchema = "java2miskatest";
-    private String userName  = "root";
-    private String password = "miska112358";
+    private String dbBaseUrl;
+    private String dbSchema;
+    private String userName;
+    private String password;
 
     public DAOImpl() {
         registerJDBCDriver();
@@ -46,6 +45,10 @@ public class DAOImpl {
         }
     }
 
+    public String getDbSchema() {
+        return dbSchema;
+    }
+
     public void setDbSchema(String dbSchema){
         this.dbSchema = dbSchema;
     }
@@ -54,7 +57,7 @@ public class DAOImpl {
         try{
             return DriverManager.getConnection(dbBaseUrl + dbSchema, userName, password);
         } catch (SQLException e) {
-            System.out.println("Exciption while getting connection to database");
+            System.out.println("Exception while getting connection to database");
             e.printStackTrace();
             throw new DBException(e);
         }
