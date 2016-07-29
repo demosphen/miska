@@ -7,10 +7,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProductDAO extends DAOImpl {
     private final static String TABLE_NAME = "products";
 
+    private final String GET_ALL_PHRASE = "SELECT * FROM " + TABLE_NAME + ";";
     private final String GET_BY_ID_PHRASE = "select * from " + TABLE_NAME + " where id = ?";
     private final String INSERT_PHRASE = "INSERT INTO " + TABLE_NAME + "(`name`, `description`, `price`) VALUES(?, ?, ?)";
     private final String DELETE_BY_ID_PHRASE = "DELETE FROM " + TABLE_NAME + " WHERE id = ?";
@@ -19,20 +22,30 @@ public class ProductDAO extends DAOImpl {
         super();
     }
 
-    public Product getById(int id) throws DBException, SQLException {
+    public Product findById(int id) throws DBException, SQLException {
         Connection connection = getConnection();
         PreparedStatement statement = connection.prepareStatement(GET_BY_ID_PHRASE);
         statement.setInt(1, id);
         ResultSet resultSet = statement.executeQuery();
         if (resultSet.next()) {
-            id = resultSet.getInt("id");
-            String name = resultSet.getString("name");
-            String description = resultSet.getString("description");
-            long price = resultSet.getLong("price");
-            return new Product(id, name, description, price);
+            return Product.fromResultSet(resultSet);
         } else {
             return null;
         }
+    }
+
+    public List<Product> findAll() throws SQLException, DBException {
+        List<Product> products = new ArrayList<Product>();
+
+        Connection connection = getConnection();
+        PreparedStatement statement = connection.prepareStatement(GET_ALL_PHRASE);
+        ResultSet resultSet = statement.executeQuery();
+
+        while (resultSet.next()) {
+            products.add(Product.fromResultSet(resultSet));
+        }
+
+        return products;
     }
 
     public int save(Product product) throws SQLException, DBException {

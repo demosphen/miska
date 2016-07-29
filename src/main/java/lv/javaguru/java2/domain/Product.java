@@ -1,5 +1,8 @@
 package lv.javaguru.java2.domain;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 public class Product {
     private int id;
     private String name;
@@ -15,6 +18,14 @@ public class Product {
         this.name = name;
         this.description = description;
         this.price = price;
+    }
+
+    public static Product fromResultSet(ResultSet resultSet) throws SQLException {
+        int id = resultSet.getInt("id");
+        String name = resultSet.getString("name");
+        String description = resultSet.getString("description");
+        long price = resultSet.getLong("price");
+        return new Product(id, name, description, price);
     }
 
     public int getId() {
