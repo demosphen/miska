@@ -17,8 +17,8 @@ public class Router implements Filter {
 
         HelloWorldController helloController = new HelloWorldController();
 
-        controllers.put("/", helloController);
-        controllers.put("/hello", helloController);
+//        controllers.put("/", helloController);
+//        controllers.put("/hello", helloController);
     }
 
     public void doFilter(ServletRequest request,

@@ -5,7 +5,7 @@
 </head>
 <body>
 <p>
-    Hello, ${requestScope.model}!
+    Hello, ${requestScope.name}!
 </p>
 </body>
 </html>
